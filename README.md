@@ -1,13 +1,13 @@
 ## Wedding Website Template Raw
 
 ### Tech Stack 
-Next.js 
-Tailwind CSS
+- Next.js 
+- Tailwind CSS
 
-Figma 
-Illustrator
+- Figma 
+- Illustrator
 
-MongoDB 
+- MongoDB 
 
-Cypress 
-BrowserStack
+- Cypress 
+- BrowserStack
