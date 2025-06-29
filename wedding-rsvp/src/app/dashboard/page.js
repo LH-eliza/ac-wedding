@@ -118,21 +118,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white font-sans">
-      <div className="p-8">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-extrabold text-blue-700 mb-10 text-center">
-            Amy & Corey's Wedding Dashboard
-          </h1>
-          <div className="flex justify-center">
-            <button
-              onClick={() => setShowModal(true)}
-              className="px-6 py-3 text-lg rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow transition"
-            >
-              Add New Group
-            </button>
-          </div>
-        </div>
-      </div>
       
       {/* RSVP Table Component - Full Width */}
       <div className="w-full">
