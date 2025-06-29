@@ -15,7 +15,7 @@ const individualSchema = new Schema({
   },
   dietaryRestrictions: { 
     type: [String], 
-    enum: ['Vegetarian', 'Vegan', 'Gluten-free', 'Dairy-free', 'Nut-free', 'Halal', 'Kosher'], 
+    enum: ['Dairy-free', 'Diabetic', 'Egg-free', 'Gluten-free', 'Halal', 'Keto', 'Kosher', 'Lactose intolerant', 'No spicy food', 'Nut-free', 'Shellfish-free', 'Soy-free', 'Vegan', 'Vegetarian'], 
     default: [] 
   },
   comments: { type: String },

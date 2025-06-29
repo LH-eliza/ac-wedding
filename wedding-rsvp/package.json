@@ -9,12 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@svgr/webpack": "^8.1.0",
     "dotenv": "^17.0.0",
+    "framer-motion": "^12.19.2",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.1",
     "next": "15.3.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-modal": "^3.16.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
