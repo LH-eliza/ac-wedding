@@ -549,7 +549,7 @@ const RSVPTable = forwardRef((props, ref) => {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  Amy & Corey's Wedding RSVP Dashboard
+                  Amy & Corey&apos;s Wedding RSVP Dashboard
                 </h1>
                 <p className="text-gray-600 mt-1">
                   {Object.keys(filteredGroupedInvitations).length} invitation
@@ -1086,7 +1086,7 @@ const RSVPTable = forwardRef((props, ref) => {
             searchTerm && (
               <div className="text-center py-12">
                 <div className="text-gray-500 text-lg">
-                  No results found for "{searchTerm}"
+                  No results found for &quot;{searchTerm}&quot;
                 </div>
                 <button
                   onClick={() => setSearchTerm("")}
