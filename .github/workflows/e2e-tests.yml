@@ -44,12 +44,14 @@ jobs:
         run: npm run build
         env:
           CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Start the application
         working-directory: ./wedding-rsvp
         run: npm start &
         env:
           CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Wait for application to be ready
         run: |
@@ -70,6 +72,7 @@ jobs:
           spec: cypress/e2e/dashboard.cy.js
         env:
           CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Upload screenshots (on failure)
         uses: actions/upload-artifact@v4
@@ -121,12 +124,14 @@ jobs:
         run: npm run build
         env:
           CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Start the application
         working-directory: ./wedding-rsvp
         run: npm start &
         env:
           CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
       - name: Wait for application to be ready
         run: |
@@ -147,6 +152,7 @@ jobs:
           spec: cypress/e2e/visual.cy.js
         env:
           CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
   test-summary:
     runs-on: ubuntu-latest
