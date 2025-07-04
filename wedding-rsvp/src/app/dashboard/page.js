@@ -99,7 +99,7 @@ export default function DashboardPage() {
           setGroupName(""); // Reset the group name input
           setMembers([{ firstName: "", lastName: "" }]); // Clear the member list
           setShowModal(false); // Close the modal
-          
+
           // Refresh the RSVP table to show the new group
           if (rsvpTableRef.current) {
             rsvpTableRef.current.refresh();
@@ -118,14 +118,16 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white font-sans">
-      
       {/* RSVP Table Component - Full Width */}
-      <div className="w-full">
+      <div className="w-full" data-testid="rsvp-table">
         <RSVPTable ref={rsvpTableRef} />
       </div>
 
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal
+          onClose={() => setShowModal(false)}
+          data-testid="add-group-modal"
+        >
           <h2 className="text-xl font-bold mb-4 text-gray-800">
             Add New Group
           </h2>
