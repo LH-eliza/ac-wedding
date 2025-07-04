@@ -10,7 +10,7 @@
 - MongoDB 
 
 - Docker
-- NGIX
+- NGINX
 
 - Cypress 
 - BrowserStack
