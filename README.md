@@ -9,5 +9,8 @@
 
 - MongoDB 
 
+- Docker
+- NGIX
+
 - Cypress 
 - BrowserStack
