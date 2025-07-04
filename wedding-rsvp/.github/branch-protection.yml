@@ -1,0 +1,50 @@
+# Branch Protection Rules for Main Branch
+# This file documents the required branch protection settings for the main branch
+
+# Required Status Checks:
+# - E2E Tests (cypress-run)
+# - Visual Regression Tests (cypress-visual)
+
+# Branch Protection Settings:
+# - Require status checks to pass before merging
+# - Require branches to be up to date before merging
+# - Require pull request reviews before merging
+# - Require conversation resolution before merging
+# - Restrict pushes that create files larger than 100MB
+
+# To configure these settings in GitHub:
+# 1. Go to Settings > Branches
+# 2. Add rule for main branch
+# 3. Enable "Require status checks to pass before merging"
+# 4. Search for and select:
+#    - "E2E Tests / Cypress E2E Tests"
+#    - "E2E Tests / Visual Regression Tests"
+# 5. Enable "Require branches to be up to date before merging"
+# 6. Enable "Require pull request reviews before merging"
+# 7. Enable "Require conversation resolution before merging"
+# 8. Enable "Restrict pushes that create files larger than 100MB"
+
+# Additional Settings:
+# - Allow force pushes: Disabled
+# - Allow deletions: Disabled
+# - Require linear history: Optional (recommended for clean history)
+# - Include administrators: Enabled (ensures all PRs follow the same rules)
+
+# Workflow Integration:
+# The e2e-tests.yml workflow will automatically run on:
+# - Pull requests to main/master
+# - Pushes to main/master
+# - Changes to src/, cypress/, package.json, or cypress.config.js files
+
+# Test Coverage:
+# - Authentication flow (4 tests)
+# - RSVP table functionality (11 tests)
+# - Group management (8 tests)
+# - Error handling (2 tests)
+# - Responsive design (2 tests)
+# - Total: 27+ test cases
+
+# Failure Handling:
+# - Screenshots and videos are uploaded as artifacts on test failure
+# - Test summary is generated regardless of test outcome
+# - Detailed error logs are available in the GitHub Actions logs
