@@ -1,0 +1,195 @@
+name: E2E Tests
+
+on:
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "wedding-rsvp/src/**"
+      - "wedding-rsvp/cypress/**"
+      - "wedding-rsvp/package.json"
+      - "wedding-rsvp/package-lock.json"
+      - "wedding-rsvp/cypress.config.js"
+  push:
+    branches: [main, master]
+    paths:
+      - "wedding-rsvp/src/**"
+      - "wedding-rsvp/cypress/**"
+      - "wedding-rsvp/package.json"
+      - "wedding-rsvp/package-lock.json"
+      - "wedding-rsvp/cypress.config.js"
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    name: Cypress E2E Tests
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "wedding-rsvp/package-lock.json"
+
+      - name: Install dependencies
+        working-directory: ./wedding-rsvp
+        run: npm ci
+
+      - name: Build the application
+        working-directory: ./wedding-rsvp
+        run: npm run build
+        env:
+          CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Start the application
+        working-directory: ./wedding-rsvp
+        run: npm start &
+        env:
+          CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Wait for application to be ready
+        run: |
+          echo "Waiting for application to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:3000 > /dev/null 2>&1; do sleep 2; done'
+          echo "Application is ready!"
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./wedding-rsvp
+          browser: chrome
+          headless: true
+          record: false
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          config: baseUrl=http://localhost:3000
+          spec: cypress/e2e/dashboard.cy.js
+        env:
+          CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Upload screenshots (on failure)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: wedding-rsvp/cypress/screenshots
+          if-no-files-found: ignore
+
+      - name: Upload videos (on failure)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos
+          path: wedding-rsvp/cypress/videos
+          if-no-files-found: ignore
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-results
+          path: wedding-rsvp/cypress/results
+          if-no-files-found: ignore
+
+  cypress-visual:
+    runs-on: ubuntu-latest
+    name: Visual Regression Tests
+    timeout-minutes: 10
+    needs: cypress-run
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "wedding-rsvp/package-lock.json"
+
+      - name: Install dependencies
+        working-directory: ./wedding-rsvp
+        run: npm ci
+
+      - name: Build the application
+        working-directory: ./wedding-rsvp
+        run: npm run build
+        env:
+          CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Start the application
+        working-directory: ./wedding-rsvp
+        run: npm start &
+        env:
+          CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+      - name: Wait for application to be ready
+        run: |
+          echo "Waiting for application to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:3000 > /dev/null 2>&1; do sleep 2; done'
+          echo "Application is ready!"
+
+      - name: Run visual regression tests
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: ./wedding-rsvp
+          browser: chrome
+          headless: true
+          record: false
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          config: baseUrl=http://localhost:3000
+          spec: cypress/e2e/visual.cy.js
+        env:
+          CI: true
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+
+  test-summary:
+    runs-on: ubuntu-latest
+    name: Test Summary
+    needs: [cypress-run, cypress-visual]
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Generate test summary
+        run: |
+          echo "## 🧪 E2E Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "${{ needs.cypress-run.result }}" == "success" ]; then
+            echo "✅ **Cypress E2E Tests**: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Cypress E2E Tests**: FAILED" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [ "${{ needs.cypress-visual.result }}" == "success" ]; then
+            echo "✅ **Visual Regression Tests**: PASSED" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ **Visual Regression Tests**: FAILED" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Coverage:" >> $GITHUB_STEP_SUMMARY
+          echo "- Authentication flow" >> $GITHUB_STEP_SUMMARY
+          echo "- RSVP table functionality" >> $GITHUB_STEP_SUMMARY
+          echo "- Group management" >> $GITHUB_STEP_SUMMARY
+          echo "- Error handling" >> $GITHUB_STEP_SUMMARY
+          echo "- Responsive design" >> $GITHUB_STEP_SUMMARY
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 **Total Tests**: 25+ test cases" >> $GITHUB_STEP_SUMMARY
+          echo "🔍 **Browser**: Chrome (Headless)" >> $GITHUB_STEP_SUMMARY
+          echo "⚡ **Environment**: Ubuntu Latest" >> $GITHUB_STEP_SUMMARY
