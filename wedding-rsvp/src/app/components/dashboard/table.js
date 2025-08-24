@@ -569,7 +569,7 @@ const RSVPTable = forwardRef((props, ref) => {
                 <button
                   onClick={fetchIndividuals}
                   disabled={loading}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition font-semibold shadow-md text-sm flex items-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="cursor-pointer px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition font-semibold shadow-md text-sm flex items-center gap-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
                   <svg
                     className={`h-4 w-4 ${loading ? "animate-spin" : ""}`}
@@ -588,7 +588,7 @@ const RSVPTable = forwardRef((props, ref) => {
                 </button>
                 <button
                   onClick={exportToCSV}
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold shadow-md text-sm flex items-center gap-2"
+                  className="cursor-pointer px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold shadow-md text-sm flex items-center gap-2"
                   data-testid="export-button"
                 >
                   <svg
@@ -608,7 +608,7 @@ const RSVPTable = forwardRef((props, ref) => {
                 </button>
                 <button
                   onClick={openAddGroupModal}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md text-sm"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold shadow-md text-sm cursor-pointer"
                   data-testid="add-group-button"
                 >
                   + Add New Group
@@ -842,7 +842,7 @@ const RSVPTable = forwardRef((props, ref) => {
                                 e.stopPropagation();
                                 openAddMemberModal(invitationCode);
                               }}
-                              className="px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-green-500"
+                              className="cursor-pointer px-3 py-1 text-xs bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-green-500"
                               title="Add new member to this group"
                               data-testid="add-member-button"
                             >
