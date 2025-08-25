@@ -525,7 +525,7 @@ const RSVPTable = forwardRef((props, ref) => {
         className="min-h-screen flex items-center justify-center"
         data-testid="loading"
       >
-        <div className="text-xl">Loading wedding RSVP data...</div>
+        <div className="text-xl text-green-600">Loading wedding RSVP data...</div>
       </div>
     );
   }

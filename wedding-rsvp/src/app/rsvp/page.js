@@ -417,93 +417,43 @@ export default function Rsvp() {
                 You&apos;re All Good!
               </h2>
             </div>
-            <div>
-                <div className="flex justify-center">
-                  <img 
-                    src="/imgs/Union.svg" 
-                    alt="Decorative wedding illustration"
-                    className="h-auto mb-6 sm:mb-8"
-                    onLoad={() => console.log('SVG loaded successfully')}
-                    onError={() => console.log('SVG failed to load')}
-                  />
-                </div>
-                <div className="max-w-4xl mx-auto px-4">
-                  {/* Main content container */}
-                  <div className="grid md:grid-cols-2 gap-8 items-start">
-                    
-                    {/* Left Column - Our Wedding Day */}
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-2 mb-4">
-            
-                        <h3 className="text-4xl italic" style={{ 
-                          color: '#317039', 
-                          fontFamily: '"Dancing Script", "Brush Script MT", "Lucida Handwriting", cursive',
-                          fontWeight: '50'
-                        }}>
-                          Our Wedding Day!
-                        </h3>
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <h4 className="text-xl font-thin" style={{ color: '#317039' }}>
-                          FRIDAY, MAY 29, 2026
-                        </h4>
-                        <p className="text-lg font-normal" style={{ color: '#317039' }}>
-                          6:30PM - 9:30PM
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right Column - Details */}
-                    <div className="space-y-6">
-                      {/* Location */}
-                      <div>
-                        <h5 className="font-bold" style={{ color: '#317039' }}>
-                          Location
-                        </h5>
-                        <a 
-                          href="https://www.google.com/maps/dir//8101+Bleeks+Rd,+Ottawa,+ON+K0A+1B0/@45.2865444,-76.0232524,11z/data=!4m9!4m8!1m0!1m5!1m1!1s0x4ccdf7b642d5fb65:0xdd24ff34431733d!2m2!1d-75.956213!2d45.1551819!3e0?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-sm leading-relaxed font-thin hover:underline cursor-pointer" 
-                          style={{ color: '#317039' }}
-                        >
-                          Bleeks and Bergamot<br/>
-                          8101 Bleeks Rd, Ottawa, ON K0A 1B0
-                        </a>
-                      </div>
-
-                      {/* Attire */}
-                      <div>
-                        <h5 className="font-bold" style={{ color: '#317039' }}>
-                          Attire: <span className="text-sm font-thin">Formal</span>
-                        </h5>
-                      </div>
-
-                      {/* Schedule */}
-                      <div>
-                        <h5 className="font-bold" style={{ color: '#317039' }}>
-                          Schedule
-                        </h5>
-                        <p className="text-sm leading-relaxed font-thin" style={{ color: '#317039' }}>
-                          Wedding Ceremony: 7:30PM<br/>
-                          Wedding Reception: 7:30PM
-                        </p>
-                      </div>
-                    </div>
+                {/* Wedding Confirmation SVG */}
+                <div
+                  className="flex justify-center mb-6 sm:mb-8"
+                  style={{ 
+                    position: 'relative',
+                    left: '50%',
+                    right: '50%',
+                    marginLeft: '-50vw',
+                    marginRight: '-50vw',
+                    width: '100vw'
+                  }}
+                >
+                  <div 
+                    onClick={() => window.open('https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=8101+Bleeks+Rd,+Ottawa,+ON+K0A+1B0', '_blank')}
+                    style={{ 
+                      width: '80%', 
+                      maxWidth: '800px',
+                      cursor: 'pointer'
+                    }}
+                    className="h-auto"
+                    title="Click to get directions to the venue"
+                  >
+                    <object 
+                      data="/imgs/Good.svg" 
+                      type="image/svg+xml"
+                      style={{ width: '100%', height: 'auto', pointerEvents: 'none' }}
+                      aria-label="Wedding Confirmation"
+                    >
+                      <img 
+                        src="/imgs/Good.svg" 
+                        alt="Wedding Confirmation" 
+                        className="h-auto"
+                        style={{ width: '100%', maxWidth: '800px' }}
+                      />
+                    </object>
                   </div>
                 </div>
-
-                <div className="flex justify-center mt-8">
-                  <img 
-                    src="/imgs/Union.svg" 
-                    alt="Decorative wedding illustration"
-                    className="h-auto mb-6 sm:mb-8"
-                    onLoad={() => console.log('SVG loaded successfully')}
-                    onError={() => console.log('SVG failed to load')}
-                  />
-                </div>
-            </div>     
           </div>
         )}
 
