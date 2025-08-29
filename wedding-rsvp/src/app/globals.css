@@ -60,7 +60,7 @@
 :root {
   --background: #fff;
   --foreground: #171717;
-  --font-family: 'Chewie Demo', Arial, Helvetica, sans-serif;
+  --font-family: 'New York', 'Libre Baskerville', serif;
 }
 
 @media (prefers-color-scheme: dark) {
